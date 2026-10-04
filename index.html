@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <meta name="theme-color" content="#12082a">
+    <title>LUDO TOP</title>
+    <link rel="icon" href="https://i.postimg.cc/TYNyNW3b/IMG-20261003-090401-376.jpg">
+    <link rel="apple-touch-icon" href="https://i.postimg.cc/TYNyNW3b/IMG-20261003-090401-376.jpg">
+    <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@500;600;700;800&family=Poppins:wght@500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html, body { min-height: 100%; }
+        body {
+            font-family: Poppins, "Hind Siliguri", sans-serif;
+            color: #fff;
+            background:
+                radial-gradient(circle at 50% 18%, rgba(124, 58, 237, .38), transparent 34%),
+                radial-gradient(circle at 80% 70%, rgba(236, 72, 153, .16), transparent 28%),
+                linear-gradient(180deg, #1a0b3a 0%, #12082a 42%, #0b061c 100%);
+        }
+        .wrap {
+            max-width: 430px;
+            margin: 0 auto;
+            min-height: 100vh;
+            padding: 18px 18px 28px;
+            position: relative;
+        }
+        .top {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 28px;
+        }
+        .brand { display: flex; align-items: center; gap: 10px; font-weight: 800; font-size: 22px; }
+        .brand img { width: 46px; height: 46px; border-radius: 12px; object-fit: cover; box-shadow: 0 0 0 2px rgba(255,255,255,.12); }
+        .menu-btn {
+            width: 42px; height: 42px; border: none; background: transparent; color: #fff;
+            font-size: 22px; cursor: pointer;
+        }
+        .pill {
+            width: fit-content;
+            margin: 8px auto 26px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(255,255,255,.08);
+            border: 1px solid rgba(255,255,255,.08);
+            border-radius: 999px;
+            padding: 8px 16px;
+            font-size: 13px;
+            font-weight: 700;
+            color: #f5c542;
+        }
+        .dot { width: 8px; height: 8px; border-radius: 50%; background: #22c55e; box-shadow: 0 0 8px #22c55e; }
+        h1 {
+            text-align: center;
+            font-size: 42px;
+            line-height: 1.12;
+            font-weight: 800;
+            letter-spacing: -.4px;
+        }
+        .c1 { color: #fff; }
+        .c2 { background: linear-gradient(90deg, #7c6cff, #d946ef); -webkit-background-clip: text; background-clip: text; color: transparent; }
+        .c3 { background: linear-gradient(90deg, #fb7185, #f59e0b); -webkit-background-clip: text; background-clip: text; color: transparent; }
+        .sub {
+            text-align: center;
+            color: #d6d3e6;
+            font-size: 15px;
+            line-height: 1.55;
+            margin: 18px 8px 28px;
+            font-weight: 500;
+        }
+        .btn {
+            width: 100%;
+            border: none;
+            border-radius: 999px;
+            padding: 16px 18px;
+            font-size: 18px;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            cursor: pointer;
+            text-decoration: none;
+        }
+        .btn-dl {
+            color: #fff;
+            background: linear-gradient(90deg, #6d5efc, #a855f7 55%, #c084fc);
+            box-shadow: 0 10px 24px rgba(124, 58, 237, .35);
+        }
+        .btn-play {
+            margin-top: 14px;
+            color: #fff;
+            background: rgba(255,255,255,.06);
+            border: 1.5px solid rgba(255,255,255,.16);
+        }
+        .stats {
+            margin-top: 34px;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            text-align: center;
+            font-weight: 800;
+            font-size: 18px;
+            align-items: center;
+        }
+        .stats span { display: block; font-size: 11px; font-weight: 600; color: #b7b3c9; margin-top: 2px; }
+        .lang {
+            position: fixed;
+            right: 16px;
+            bottom: 22px;
+            background: #2a2344;
+            color: #fff;
+            border: none;
+            border-radius: 999px;
+            padding: 8px 14px;
+            font-weight: 700;
+            font-family: "Hind Siliguri", sans-serif;
+            cursor: pointer;
+        }
+        .drawer-bg { position: fixed; inset: 0; background: rgba(0,0,0,.45); opacity: 0; pointer-events: none; transition: .2s; }
+        .drawer-bg.open { opacity: 1; pointer-events: auto; }
+        .drawer {
+            position: fixed; top: 0; right: 0; height: 100%; width: min(78%, 280px);
+            background: #160b30; transform: translateX(105%); transition: .25s; padding: 22px 16px;
+        }
+        .drawer.open { transform: translateX(0); }
+        .drawer a, .drawer button {
+            display: block; width: 100%; text-align: left; background: transparent; border: none;
+            color: #fff; padding: 14px 8px; font-size: 16px; font-weight: 700; text-decoration: none; cursor: pointer;
+        }
+        @media (min-width: 480px) {
+            .wrap { padding-top: 36px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="drawer-bg" id="drawerBg" onclick="toggleMenu(false)"></div>
+    <aside class="drawer" id="drawer">
+        <a href="https://tishan-724.github.io/Ludo-Top/">Play Online</a>
+        <a href="https://raw.githubusercontent.com/tishan-724/Ludo-Top/main/LUDO_TOP.apk">Download App</a>
+        <button type="button" onclick="toggleLang()">Language</button>
+    </aside>
+    <div class="wrap">
+        <div class="top">
+            <div class="brand">
+                <img src="https://i.postimg.cc/TYNyNW3b/IMG-20261003-090401-376.jpg" alt="LUDO TOP">
+                <span>LUDO TOP</span>
+            </div>
+            <button class="menu-btn" type="button" onclick="toggleMenu(true)"><i class="fa-solid fa-bars"></i></button>
+        </div>
+        <div class="pill"><i class="dot"></i> <span id="players">50,000+ Active Players</span></div>
+        <h1>
+            <span class="c1" id="l1">Play Ludo,</span><br>
+            <span class="c2" id="l2">Challenge</span><br>
+            <span class="c3" id="l3">Friends</span>
+        </h1>
+        <p class="sub" id="sub">Bangladesh's favourite classic board game. Play with friends & family, climb leaderboards, and enjoy the nostalgia of Ludo — anytime, anywhere.</p>
+        <a class="btn btn-dl" href="https://raw.githubusercontent.com/tishan-724/Ludo-Top/main/LUDO_TOP.apk">
+            <i class="fa-solid fa-mobile-screen"></i> <span id="dl">Download App</span>
+        </a>
+        <a class="btn btn-play" href="https://tishan-724.github.io/Ludo-Top/">
+            <i class="fa-solid fa-rocket"></i> <span id="play">Play Online</span>
+        </a>
+        <div class="stats">
+            <div>50K+<span id="s1">Players</span></div>
+            <div>4.5 ★<span id="s2">Rating</span></div>
+            <div>100%<span id="s3">Fun</span></div>
+            <div>24/7<span id="s4">Online</span></div>
+        </div>
+    </div>
+    <button class="lang" id="langBtn" type="button" onclick="toggleLang()">বাংলা</button>
+    <script>
+        let bn = false;
+        function toggleMenu(open) {
+            document.getElementById("drawer").classList.toggle("open", open);
+            document.getElementById("drawerBg").classList.toggle("open", open);
+        }
+        function toggleLang() {
+            bn = !bn;
+            document.getElementById("langBtn").textContent = bn ? "English" : "বাংলা";
+            document.documentElement.lang = bn ? "bn" : "en";
+            document.getElementById("players").textContent = bn ? "৫০,০০০+ অ্যাকটিভ প্লেয়ার" : "50,000+ Active Players";
+            document.getElementById("l1").textContent = bn ? "লুডো খেলুন," : "Play Ludo,";
+            document.getElementById("l2").textContent = bn ? "চ্যালেঞ্জ" : "Challenge";
+            document.getElementById("l3").textContent = bn ? "বন্ধুদের" : "Friends";
+            document.getElementById("sub").textContent = bn
+                ? "বাংলাদেশের প্রিয় ক্লাসিক বোর্ড গেম। বন্ধু ও পরিবারের সাথে খেলুন, লিডারবোর্ডে উঠুন, আর যেকোনো সময় লুডোর মজা নিন।"
+                : "Bangladesh's favourite classic board game. Play with friends & family, climb leaderboards, and enjoy the nostalgia of Ludo — anytime, anywhere.";
+            document.getElementById("dl").textContent = bn ? "অ্যাপ ডাউনলোড" : "Download App";
+            document.getElementById("play").textContent = bn ? "অনলাইনে খেলুন" : "Play Online";
+            document.getElementById("s1").textContent = bn ? "প্লেয়ার" : "Players";
+            document.getElementById("s2").textContent = bn ? "রেটিং" : "Rating";
+            document.getElementById("s3").textContent = bn ? "মজা" : "Fun";
+            document.getElementById("s4").textContent = bn ? "অনলাইন" : "Online";
+            toggleMenu(false);
+        }
+    </script>
+</body>
+</html>
